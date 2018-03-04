@@ -5,6 +5,7 @@
 解题思路（python）：
 把二维数组看成是n个有序的一维数组，对一维数组进行二分查找。
 
+
 # -*- coding:utf-8 -*-
 class Solution:
     # array 二维列表
