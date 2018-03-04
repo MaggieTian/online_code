@@ -23,6 +23,7 @@ class Solution:
                     return True
                 elif data[middle] < x:
                     left = middle+1
+                    
                 else:
                     right = middle-1
             return False     
@@ -32,3 +33,22 @@ class Solution:
                 return True
         return False
 </code>
+解题思路二：
+从二维数组最左下方开始查找，若比查找的数大，则往上走，反之往右走。（因为数组行从上到下递增，从左到右递增）
+
+<code>
+       
+    
+    def Find(self, target, array):
+        j =len(array)-1
+        i =0
+        while i <=len(array[j])-1 and j >=0:
+            if array[j][i] ==target:
+                return True
+            if array[j][i] > target:
+                j -=1
+            elif array[j][i] < target:
+                i+=1
+        return False
+</code>
+
