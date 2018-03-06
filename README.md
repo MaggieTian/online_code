@@ -36,6 +36,8 @@ class Solution:
 从二维数组最左下方开始查找，若比查找的数大，则往上走，反之往右走。（因为数组行从上到下递增，从左到右递增）
 
 <code>
+            
+
        
     
     def Find(self, target, array):
@@ -100,4 +102,29 @@ class Solution:
             node.right = self.reConstructBinaryTree(pre[tin.index(pre[0])+1:],tin[tin.index(pre[0])+1:])
             return node
                 
+ </code>
+   
+4. 用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。
+       
+            
+解题思路：使用两个列表a 和b,push元素时往a中push,pop元素时，先将a中的元素全部pop出来并添加到b中，这样b中的序列刚好与a中相反，先push的元素在顶，后puhs的元素在底。这样队列要pop的元素就是b中最顶的元素，将b中顶部元素pop出来，然后将剩余元素都依次pop出并添加到a中，此时a中的序列刚好跟原来一样，并去掉了最底的元素，此时将从b中pop的元素返回便实现了队列的pop功能。
+<code>
+    
+ class Solution:
+        
+    a = []
+    b = []
+    def push(self, node):
+        # write code here
+        self.a.append(node)
+    def pop(self):
+        # return xx
+        vaule = None
+        while self.a:
+            self.b.append(self.a.pop()) #将a中的元素全部push到b中
+        if self.b:
+            vaule = self.b.pop()
+        while self.b:
+            self.a.append(self.b.pop())
+        return vaule  
  </code>
