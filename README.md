@@ -128,3 +128,36 @@ class Solution:
             self.a.append(self.b.pop())
         return vaule  
  </code>
+ 5.给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。
+    
+ 例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}；
+    
+ 针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个： {[2,3,4],2,6,2,5,1}， {2,[3,4,2],6,2,5,1}， {2,3,[4,2,6],2,5,1}， {2,3,4,[2,6,2],5,1}， {2,3,4,2,[6,2,5],1}， {2,3,4,2,6,[2,5,1]}。
+   
+ 解题思路：滑动窗口可用固定长度的队列来实现（当固定长度的队列的记录已满，新加入元素时会自动移出最老的元素，刚好就是滑动窗口）
+ 记录滑动窗口的最大值，每当滑动窗口滑动一次，即将数组的下一个元素新加入队时，若改新元素比窗口最大值大，那么新窗口的最大值就是改新元素。若新元素比原滑动窗口的最大值小，那么此时需要依次比较滑动窗口里的元素，重新找出最大值。（因为此时原滑动窗口的最大值可能会被移出）
+ 
+ <code>
+            
+     def maxInWindows(self, num, size):
+        # write code here
+        if len(num)==0 or size ==0:
+            return []
+        import collections
+        window = collections.deque(maxlen=size) # 创建最大长度为size的队列为滑动窗口
+        maxnum = num[0]
+        result = []
+        for index,i in enumerate(num):
+            window.append(i)
+            if i >=maxnum:
+                maxnum = i
+            elif index>=size-1:
+                maxnum = window[0]
+                for j in range(len(window)-1):
+                    if window[j]> maxnum:
+                        maxnum = window[j]
+            if index >= size-1:
+                result.append(maxnum)
+        return result
+  </code>
+ 
