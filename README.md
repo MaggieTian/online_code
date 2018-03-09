@@ -160,4 +160,30 @@ class Solution:
                 result.append(maxnum)
         return result
   </code>
- 
+ 6.给定一个数组A[0,1,...,n-1],请构建一个数组B[0,1,...,n-1],其中B中的元素B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。不能使用除法。
+      
+ 解题思路：B[i]的值可以看作下图的矩阵中每行的乘积。下三角用连乘可以很容求得，上三角，从下向上也是连乘。
+因此我们的思路就很清晰了，先算下三角中的连乘，即我们先算出B[i]中的一部分，然后倒过来按上三角中的分布规律，把另一部分也乘进去
+    
+ <img src ='https://github.com/MaggieTian/online_code/blob/master/picture/multi_array.jpg' height="400" width="400"></img>
+     
+  
+     def multiply(self, A):
+        # write code here
+        B = []
+        if A:
+            n = len(A)
+            B.append(1)
+            for i in range(1,n):
+                B.append(B[i-1]*A[i-1])
+            temp = 1
+            j = n-2
+            while j>=0:
+                temp*=A[j+1]
+                B[j]*=temp
+                j-=1
+        return B
+    
+
+
+
